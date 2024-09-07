@@ -10,3 +10,5 @@ Steps:
 2.TeamDetails - this component will show all players in a roster view with search and filter functionality
 3.PlayerInfo - this component will show info about players with their name,position, and number
 4.MatchBracket - this component will display each match in the tournament bracket
+
+# Now I create a custom Hook named useCSV.js which will use for my csv files and reuse for each component
