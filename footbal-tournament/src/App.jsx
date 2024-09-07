@@ -1,35 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React from 'react';
+import { useCSV } from './hooks/useCSV';
+import MatchDetails from "./components/MatchDetails.jsx";
+import TeamDetails from "./components/TeamDetails.jsx"
+
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const {data: matches} = useCSV('/data/matches.csv');
+  const {data: teams} = useCSV('/data/teams/csv');
+  const {data: players} = useCSV('/data.players.csv');
+
+  const match = matches[0];
+  const teamA = teams.find(t => t.ID === match.ATeamID);
+  const teamB = teams.find(t => t.ID === match.BTeamID);
+
+  const teamAPlayers =players.filter(p => p.TeamID === teamA.ID);
+  const teamBPlayers = players.filter(p => p.TeamID === teamB.ID);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className='App'>
+      <h1>Football Tournament</h1>
+      <MatchDetails match={match} teamA= {{...teamA, players: teamAPlayers}} teamB={{...teamB,players:teamBPlayers}}/>
+      <TeamDetails team={{...teamA, players: teamAPlayers}}/>
+    </div>
+  );
+};
 
 export default App

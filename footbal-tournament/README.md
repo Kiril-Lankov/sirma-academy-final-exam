@@ -11,4 +11,7 @@ Steps:
 3.PlayerInfo - this component will show info about players with their name,position, and number
 4.MatchBracket - this component will display each match in the tournament bracket
 
-# Now I create a custom Hook named useCSV.js which will use for my csv files and reuse for each component
+# Now I create a custom Hook named useCSV.js which will use for my csv files and reuse for each component.It will load files and parse them into usable data.
+
+# Now I create content for each of my React components
+# I will navigate through components using React Router
