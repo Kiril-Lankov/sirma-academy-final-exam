@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { useCSV } from "../hooks/useCSV";
-import { Link , useNavigate} from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 
 const TeamDetails = () => {
   const { teamId,} = useParams();

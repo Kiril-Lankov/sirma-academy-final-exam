@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams,} from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
 import { useCSV } from "../hooks/useCSV";
 
@@ -49,9 +49,11 @@ const MatchDetails = () => {
           </Link>
           <div className="formation">
             {teamAPlayers.map(player => (
-              <div key={player.ID} className={`player ${player.Position}`}>
+              <Link to={`/player/${player.ID}`} key={player.ID} className="player-info">
+              <div className={`player ${player.Position}`}>
                 {player.FullName} - {player.Position}
               </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -63,9 +65,11 @@ const MatchDetails = () => {
           </Link>
           <div className="formation">
             {teamBPlayers.map(player => (
-              <div key={player.ID} className={`player ${player.Position}`}>
+              <Link to={`player/${player.ID}`} key={player.ID} className="player-info">
+              <div className={`player ${player.Position}`}>
                 {player.FullName} - {player.Position}
               </div>
+              </Link>
             ))}
           </div>
         </div>
