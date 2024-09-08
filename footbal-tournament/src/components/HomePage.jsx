@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useCSV } from "../hooks/useCSV";
+import  useCSV from "../hooks/useCSV";
 
-const HomePage = () => {
+export default function HomePage() {
   const { data: matches, loading: matchesLoading, error: matchesError } = useCSV("/data/matches.csv");
   const { data: teams, loading: teamsLoading, error: teamsError } = useCSV("/data/teams.csv");
 
@@ -14,12 +14,13 @@ const HomePage = () => {
     const team = teams.find(t => t.ID === teamID);
     return team ? team.Name : "Unknown Team";
   };
+  
 
   return (
     <div className="container">
       <h1>Football Tournament EURO 2024</h1>
 
-      {/* List the matches */}
+      
       <ul>
         {matches.map((match) => (
           <li key={match.ID}>
@@ -31,6 +32,4 @@ const HomePage = () => {
       </ul>
     </div>
   );
-};
-
-export default HomePage;
+}

@@ -1,8 +1,8 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useCSV } from "../hooks/useCSV";
+import useCSV from "../hooks/useCSV";
 
-const PlayerDetails = () => {
+export default function PlayerDetails() {
     //get player ID from url
     const {playerId} = useParams();
     const navigate = useNavigate();
@@ -15,6 +15,7 @@ const PlayerDetails = () => {
     
     const playerInfo = players.find(player => player.ID === playerId);
     const playerTime = records.find(record => record.ID === playerId);
+    const playerTeam = teams.find(team => team.ID === playerInfo.TeamID);
 
     if (!playerInfo || !playerTime ) 
         return <p>Player not found</p>
@@ -22,7 +23,7 @@ const PlayerDetails = () => {
     return (
         <div className="player-details">
             <h2>Name: {playerInfo.FullName}</h2>
-            
+            <p>Team: {playerTeam? playerTeam.Name : "Unknown Team"}</p>
             <p>Position: {playerInfo.Position}</p>
             <p>Number:{playerInfo.TeamNumber}</p>
             <p>Played from Minute:{playerTime.fromMinutes}</p>
@@ -40,7 +41,4 @@ const PlayerDetails = () => {
         </div>
     );
 
-
-    
 }
-export default PlayerDetails;

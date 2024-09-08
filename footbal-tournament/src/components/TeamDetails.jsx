@@ -1,9 +1,9 @@
 import React from "react";
 import { useLocation, useParams } from "react-router-dom";
-import { useCSV } from "../hooks/useCSV";
+import useCSV from "../hooks/useCSV";
 import { useNavigate} from "react-router-dom";
 
-const TeamDetails = () => {
+export default function TeamDetails() {
   const { teamId} = useParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -53,6 +53,6 @@ const TeamDetails = () => {
       </div>
       </div>
       );
-};
+}
 
-      export default TeamDetails;
+    

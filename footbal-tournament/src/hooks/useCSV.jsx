@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export const useCSV = (url) => {
+export default function useCSV(url) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

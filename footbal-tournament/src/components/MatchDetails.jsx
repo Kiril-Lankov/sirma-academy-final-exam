@@ -1,11 +1,11 @@
 import React from "react";
 import { useParams,} from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
-import { useCSV } from "../hooks/useCSV";
+import useCSV  from "../hooks/useCSV";
 
-//import './MatchDetails.css'; // Import the custom CSS for layout
+import './MatchDetails.css'; 
 
-const MatchDetails = () => {
+export default function MatchDetails() {
   
   const { matchId } = useParams(); // Get matchId from url
   const navigate = useNavigate();
@@ -25,10 +25,7 @@ const MatchDetails = () => {
     return team ? team.Name : "Unknown Team";
   };
 
-  // function to filter players by their team
-  //const getTeamPlayers = (teamID) => {
-   // return players.filter(player => player.TeamID === teamID);
-  //};
+  
 
   // Players for both teams
   const teamAPlayers = players.filter(player => player.TeamID === match.ATeamID);
@@ -36,13 +33,11 @@ const MatchDetails = () => {
 
   return (
     <div className="match-details">
-      {/* Display Match Result */}
       <h3>{`Match ${match.ID}: ${getTeamName(match.ATeamID)} vs ${getTeamName(match.BTeamID)}`}</h3>
       <p className="match-score">Score: {match.Score}</p>
 
-      {/* Display both teams side by side */}
       <div className="teams">
-        {/* TeamA */}
+       
         <div className="team">
           <Link to={`/team/${match.ATeamID}`} state={{matchId: match.ID}} className="team-name">
             <h4>{getTeamName(match.ATeamID)}</h4>
@@ -58,7 +53,7 @@ const MatchDetails = () => {
           </div>
         </div>
 
-        {/* TeamB */}
+        
         <div className="team">
         <Link to={`/team/${match.BTeamID}`} state={{matchId: match.ID}} className="team-name">
             <h4>{getTeamName(match.BTeamID)}</h4>
@@ -85,6 +80,5 @@ const MatchDetails = () => {
 
 
   );
-};
+}
 
-export default MatchDetails;
