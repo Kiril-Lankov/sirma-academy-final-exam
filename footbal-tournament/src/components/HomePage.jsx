@@ -9,7 +9,7 @@ const HomePage = () => {
   if (matchesLoading || teamsLoading) return <p>Loading matches and teams...</p>;
   if (matchesError || teamsError) return <p>Error: {matchesError || teamsError}</p>;
 
-  // Helper function to get team name by ID
+  // function to get team name by ID
   const getTeamName = (teamID) => {
     const team = teams.find(t => t.ID === teamID);
     return team ? team.Name : "Unknown Team";
