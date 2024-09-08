@@ -26,6 +26,8 @@ export default function TeamDetails() {
 
   const teamPlayers = players.filter(p => p.TeamID === teamId);
 
+  
+
   return (
     <div>
       <h1>{team.Name}</h1>
@@ -37,7 +39,7 @@ export default function TeamDetails() {
         <ul>
           {teamPlayers.map(player => (
             <li key={player.ID}>
-              {player.FullName} - {player.Position}
+              {player.TeamNumber}: {player.FullName} - {player.Position}
             </li>
           ))}
         </ul>
