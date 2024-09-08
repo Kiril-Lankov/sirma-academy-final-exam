@@ -11,8 +11,8 @@ export default function useCSV(url) {
         const response = await fetch(url);
         if (!response.ok) throw new Error("Network response was not ok");
 
-        const csvText = await response.text(); // Get CSV text content
-        const parsedData = parseCSV(csvText);  // Parse CSV into objects
+        const csvText = await response.text(); // get CSV text content
+        const parsedData = parseCSV(csvText);  // parse CSV data into objects
         setData(parsedData);
       } catch (err) {
         setError(err.message);

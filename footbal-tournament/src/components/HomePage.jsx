@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import  useCSV from "../hooks/useCSV";
 
+import './HomePage.css'; 
 export default function HomePage() {
   const { data: matches, loading: matchesLoading, error: matchesError } = useCSV("/data/matches.csv");
   const { data: teams, loading: teamsLoading, error: teamsError } = useCSV("/data/teams.csv");
@@ -25,7 +26,9 @@ export default function HomePage() {
         {matches.map((match) => (
           <li key={match.ID}>
             <Link to={`/match/${match.ID}`}>
-              {`Match ${match.ID}: ${getTeamName(match.ATeamID)} vs ${getTeamName(match.BTeamID)} - Score: ${match.Score}`}
+              {`${getTeamName(match.ATeamID)} vs ${getTeamName(match.BTeamID)}`}
+              {` - Score: ${match.Score}`}
+              
             </Link>
           </li>
         ))}

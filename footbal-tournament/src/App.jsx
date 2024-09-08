@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Match from "./pages/Match";
 import Team from "./pages/Team";
 import Player from "./pages/Player";
+import "./App.css"
 
 const App = () => {
   return (

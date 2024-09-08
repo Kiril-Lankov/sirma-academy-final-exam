@@ -7,7 +7,7 @@ import './MatchDetails.css';
 
 export default function MatchDetails() {
   
-  const { matchId } = useParams(); // Get matchId from url
+  const { matchId } = useParams(); // get matchId from url
   const navigate = useNavigate();
   const { data: matches, loading: matchesLoading } = useCSV("/data/matches.csv");
   const { data: players, loading: playersLoading } = useCSV("/data/players.csv");
@@ -33,14 +33,14 @@ export default function MatchDetails() {
 
   return (
     <div className="match-details">
-      <h3>{`Match ${match.ID}: ${getTeamName(match.ATeamID)} vs ${getTeamName(match.BTeamID)}`}</h3>
-      <p className="match-score">Score: {match.Score}</p>
+      <h1>{`${getTeamName(match.ATeamID)} vs ${getTeamName(match.BTeamID)}`}</h1>
+      <h2 className="match-score">Score: {match.Score}</h2>
 
       <div className="teams">
        
         <div className="team">
           <Link to={`/team/${match.ATeamID}`} state={{matchId: match.ID}} className="team-name">
-            <h4>{getTeamName(match.ATeamID)}</h4>
+            <h2>{getTeamName(match.ATeamID)}</h2>
           </Link>
           <div className="formation">
             {teamAPlayers.map(player => (
@@ -56,7 +56,7 @@ export default function MatchDetails() {
         
         <div className="team">
         <Link to={`/team/${match.BTeamID}`} state={{matchId: match.ID}} className="team-name">
-            <h4>{getTeamName(match.BTeamID)}</h4>
+            <h2>{getTeamName(match.BTeamID)}</h2>
           </Link>
           <div className="formation">
             {teamBPlayers.map(player => (

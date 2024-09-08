@@ -1,0 +1,49 @@
+.team-details {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+
+  .manager{
+    color: aliceblue;
+    font-size: larger;
+    
+
+  }
+
+  .group{
+    color: aliceblue;
+    font-size: larger;
+    font-weight: bold;
+  }
+  
+  .roster ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .roster li {
+    background-color: #ecf0f1da;
+    color: rgb(0, 92, 212);
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    flex: 1 1 calc(33% - 10px);
+  }
+  
+ 
+  @media (max-width: 1024px) {
+    .roster li {
+      flex: 1 1 calc(50% - 10px);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .roster li {
+      flex: 1 1 100%;
+    }
+  }

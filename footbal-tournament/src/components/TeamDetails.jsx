@@ -3,19 +3,21 @@ import { useLocation, useParams } from "react-router-dom";
 import useCSV from "../hooks/useCSV";
 import { useNavigate} from "react-router-dom";
 
+import "./TeamDetails.css";
+
 export default function TeamDetails() {
   const { teamId} = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const { data: teams, loading: teamsLoading } = useCSV("/data/teams.csv");
   const { data: players, loading: playersLoading } = useCSV("/data/players.csv");
-
+ // use this to pass data from one route to other 
   const matchId = location.state ? location.state.matchId: null;
   
 
   if (teamsLoading || playersLoading) return <p>Loading team details...</p>;
 
-  // Find the team by its ID
+  // find the team by its ID
   const team = teams.find(t => t.ID === teamId);
 
   if (!team) {
@@ -26,12 +28,12 @@ export default function TeamDetails() {
 
   return (
     <div>
-      <h2>{team.Name}</h2>
-      <p>Manager: {team.ManagerFullName}</p>
-      <p>Group: {team.Group}</p>
+      <h1>{team.Name}</h1>
+      <p className="manager">Manager: {team.ManagerFullName}</p>
+      <p className="group">Group: {team.Group}</p>
 
       <div className="roster">
-        <h3>Team Roster</h3>
+
         <ul>
           {teamPlayers.map(player => (
             <li key={player.ID}>

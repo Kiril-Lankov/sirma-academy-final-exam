@@ -1,101 +1,144 @@
 .match-details {
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-  }
-  
-  .match-details h3 {
-    text-align: center;
-    font-size: xx-large;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #007bff;
-    margin-bottom: 10px;
-    margin-top: 10px;
-  }
-  
-  .match-score {
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 25px;
-    font-weight: bold;
-    color: #6c11ff;
-    margin-bottom: 20px;
-  }
-  
-  /* Teams side by side */
-  .teams {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-  }
-  
+  background-image: url("/data/eurofootball2024.jpg");
+  background-position: center;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin: auto;
+}
+
+
+.match-score {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 25px;
+  background-color: rgba(255, 235, 205, 0.377);
+  color: #620eff;
+}
+
+
+.teams {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.team {
+  flex: 1 1 calc(50% - 20px);
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.team-name {
+  font-size: 20px;
+  font-weight: bold;
+  color: #3498db;
+  margin-bottom: 10px;
+}
+
+.formation {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.player-info {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  align-items: center;
+  justify-content:center;
+  padding: 10px;
+  background-color: #ecf0f1;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 16px;
+  width: 100px;
+  cursor: pointer;
+}
+
+.player-info:hover {
+  background-color: #bdc3c7;
+}
+
+
+
+
+.back-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+button.home-button {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button.home-button:hover {
+  background-color: #2980b9;
+}
+
+
+@media (max-width: 1024px) {
   .team {
-    flex: 1;
-    background-color: #44dd72e5;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex: 1 1 100%;
   }
-  
-  .team h4 {
-    text-align: center;
-    font-size: larger;
-    font-style:initial;
-    margin-bottom: 15px;
-    color: #3019ff;
+
+  .player-info {
+    width: 80px;
+    font-size: 14px;
   }
-  .team h4:hover {
-    cursor: pointer;
-    color: blue;
+
+  .match-score {
+    font-size: 22px;
   }
-  
-  /* Formation - players positioned in a grid layout */
-  .formation {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Adjust grid based on formation (e.g., 4-4-2) */
-    gap: 10px;
-    justify-items:auto;
+}
+
+@media (max-width: 768px) {
+  .match-score {
+    font-size: 20px;
   }
-  
-  .player {
-    background-color: #6f68d1;
-    color: #ffffff;
-    padding: 10px;
-    border-radius: 5px;
-    text-align: center;
-    font-size: 0.9em;
-    font-family: Arial, Helvetica, sans-serif;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    width: 80%;
+
+  .player-info {
+    width: 70px;
+    font-size: 12px;
   }
-  
-  .player.GK {
-    grid-column: span 4;
-    font-size:small;
-    color: rgb(21, 0, 209); /* Make goalkeeper span across the grid */
+}
+
+@media (max-width: 480px) {
+  .match-details {
+    padding: 15px;
   }
-  
-  .player.DF {
-    grid-column: span 3; /* Defenders cover 3 columns */
+
+  .team {
+    padding: 15px;
   }
-  
-  .player.MF {
-    grid-column: span 4; /* Midfielders cover 4 columns */
+
+  .team-name {
+    font-size: 18px;
   }
-  
-  .player.FW {
-    grid-column: span 2; /* Forwards cover 2 columns */
+
+  .match-score {
+    font-size: 18px;
   }
-  
-  /* Responsive for smaller screens */
-  @media only screen and (max-width: 768px) {
-    .teams {
-      flex-direction: column;
-    }
-  
-    .formation {
-      grid-template-columns: repeat(2, 1fr); /* Adjust grid for mobile view */
-    }
+
+  .player-info {
+    width: 60px;
+    font-size: 10px;
   }
+}
