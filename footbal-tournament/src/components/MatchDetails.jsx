@@ -1,15 +1,11 @@
 import React from 'react';
 
-//import TeamFormation from './TeamFormation';
+const PlayerInfo = ({ player }) => (
+  <div className="player-card">
+    <p><strong>{player.fullName}</strong></p>
+    <p>Position: {player.position}</p>
+    <p>Team Number: {player.teamNumber}</p>
+  </div>
+);
 
-const MatchDetails = ({ match, teamA, teamB }) => {
-  return (
-    <div className="match-details">
-      <h1>{teamA.name} {match.score} {teamB.name}</h1>
-      <p>Date: {match.date}</p>
-
-    </div>
-  );
-};
-
-export default MatchDetails;
+export default PlayerInfo;
