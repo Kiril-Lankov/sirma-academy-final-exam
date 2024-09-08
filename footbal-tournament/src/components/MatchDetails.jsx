@@ -60,12 +60,12 @@ const MatchDetails = () => {
 
         {/* TeamB */}
         <div className="team">
-          <Link to={`/team/${match.BTeamID}`} state={{matchId: match.ID}} className="team-name">
+        <Link to={`/team/${match.BTeamID}`} state={{matchId: match.ID}} className="team-name">
             <h4>{getTeamName(match.BTeamID)}</h4>
           </Link>
           <div className="formation">
             {teamBPlayers.map(player => (
-              <Link to={`player/${player.ID}`} key={player.ID} className="player-info">
+              <Link to={`/player/${player.ID}`} key={player.ID} className="player-info">
               <div className={`player ${player.Position}`}>
                 {player.FullName} - {player.Position}
               </div>

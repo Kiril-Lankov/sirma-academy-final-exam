@@ -4,7 +4,7 @@ import { useCSV } from "../hooks/useCSV";
 import { useNavigate} from "react-router-dom";
 
 const TeamDetails = () => {
-  const { teamId,} = useParams();
+  const { teamId} = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const { data: teams, loading: teamsLoading } = useCSV("/data/teams.csv");
@@ -28,6 +28,7 @@ const TeamDetails = () => {
     <div>
       <h2>{team.Name}</h2>
       <p>Manager: {team.ManagerFullName}</p>
+      <p>Group: {team.Group}</p>
 
       <div className="roster">
         <h3>Team Roster</h3>
