@@ -1,11 +1,12 @@
 import React from "react";
 import MatchDetails from "../components/MatchDetails";
 
-export default function Match() {
+const Match = () => {
+  return (
+    <div>
+      <MatchDetails />
+    </div>
+  );
+};
 
-    return (
-        <div>
-            <MatchDetails/>
-        </div>
-    );
-}
+export default Match;

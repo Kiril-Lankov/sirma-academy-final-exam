@@ -1,22 +1,22 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import useCSV from "../hooks/useCSV";
+import { useCSV } from "../hooks/useCSV";
 
-export default function TeamDetails() {
-  const {teamID} = useParams();
-  const {data: teams, loading : teamsLoading, error: teamsError} = useCSV("/data/teams.csv");
-  const {data:players, loading: playersLoading, error: playersError} = useCSV("/data/players.csv");
+const TeamDetails = () => {
+  const { teamId } = useParams();
+  const { data: teams, loading: teamsLoading } = useCSV("/data/teams.csv");
+  const { data: players, loading: playersLoading } = useCSV("/data/players.csv");
 
-  if (teamsLoading || playersLoading)
-    return <p>Loading team...</p>
+  if (teamsLoading || playersLoading) return <p>Loading team details...</p>;
 
-  //finding tem by its ID
-  const team = teams.find(t => t.ID === teamID);
+  // Find the team by its ID
+  const team = teams.find(t => t.ID === teamId);
 
-  if (!team)
-    return <p>Team not found</p>;
+  if (!team) {
+    return <p>Team not found.</p>;
+  }
 
-  const teamPlayers = players.filter(p => p.teamID === teamID);
+  const teamPlayers = players.filter(p => p.TeamID === teamId);
 
   return (
     <div>
@@ -28,11 +28,11 @@ export default function TeamDetails() {
         {teamPlayers.map(player => (
           <li key={player.ID}>
             {player.FullName} - {player.Position}
-            </li>
+          </li>
         ))}
       </ul>
     </div>
-  
   );
+};
 
-}
+export default TeamDetails;

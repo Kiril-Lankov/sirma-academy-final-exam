@@ -1,41 +1,40 @@
 import { useState, useEffect } from "react";
-// create custom Hook which can load and read CSV data
-export default function useCSV(url) {
-    const[data, setData] = useState([]);
-    const[loading, setLoading] = useState(true);
-    const[error, setError] = useState(null);
 
-     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch(url);
-                if (!response.ok) throw new Error ("Network not responding.");
-             // Get content from CSV files
-                const csvText = await response.text();
-            //Parse CVS data into objects
-            const parseData = parseCSV(csvText);
-            } catch (err) {
-                setError(err.message);
-                
-            }finally{
-                setLoading(false);
-            }
-        };
-        fetchData();
-     }, [url]);
+export const useCSV = (url) => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-     const parseCSV = (csvText) => {
-        const lines = csvText.split("\n").map(line => line.trim()); //split CSV text to new lines
-        const headers = lines[0].split(",").map(header => header.trim()); // Extract headers
-        return lines.slice(1).map(line => {
-            const values = line.split(",").map(value => value.trim()); //Extract row values
-            return headers.reduce((obj, header, index) => {
-                obj[header] = values[index]; //Map headers to value
-                return obj;
-            }, {});
-        });
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Network response was not ok");
 
-     };
+        const csvText = await response.text(); // Get CSV text content
+        const parsedData = parseCSV(csvText);  // Parse CSV into objects
+        setData(parsedData);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-     return {data, loading, error}
-}
+    fetchData();
+  }, [url]);
+
+  const parseCSV = (csvText) => {
+    const lines = csvText.split("\n").map(line => line.trim());
+    const headers = lines[0].split(",").map(header => header.trim()); // Extract headers
+    return lines.slice(1).map(line => {
+      const values = line.split(",").map(value => value.trim()); // Extract row values
+      return headers.reduce((obj, header, index) => {
+        obj[header] = values[index];  // Map headers to values
+        return obj;
+      }, {});
+    });
+  };
+
+  return { data, loading, error };
+};
