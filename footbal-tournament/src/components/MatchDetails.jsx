@@ -1,10 +1,14 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useCSV } from "../hooks/useCSV"; 
+import { Link, useNavigate } from "react-router-dom";
+import { useCSV } from "../hooks/useCSV";
+
 //import './MatchDetails.css'; // Import the custom CSS for layout
 
 const MatchDetails = () => {
+  
   const { matchId } = useParams(); // Get matchId from url
+  const navigate = useNavigate();
   const { data: matches, loading: matchesLoading } = useCSV("/data/matches.csv");
   const { data: players, loading: playersLoading } = useCSV("/data/players.csv");
   const { data: teams, loading: teamsLoading } = useCSV("/data/teams.csv");
@@ -22,13 +26,13 @@ const MatchDetails = () => {
   };
 
   // function to filter players by their team
-  const getTeamPlayers = (teamID) => {
-    return players.filter(player => player.TeamID === teamID);
-  };
+  //const getTeamPlayers = (teamID) => {
+   // return players.filter(player => player.TeamID === teamID);
+  //};
 
   // Players for both teams
-  const teamAPlayers = getTeamPlayers(match.ATeamID);
-  const teamBPlayers = getTeamPlayers(match.BTeamID);
+  const teamAPlayers = players.filter(player => player.TeamID === match.ATeamID);
+  const teamBPlayers = players.filter(player => player.TeamID === match.BTeamID);
 
   return (
     <div className="match-details">
@@ -40,7 +44,9 @@ const MatchDetails = () => {
       <div className="teams">
         {/* TeamA */}
         <div className="team">
-          <h4>{getTeamName(match.ATeamID)}</h4>
+          <Link to={`/team/${match.ATeamID}`} state={{matchId: match.ID}} className="team-name">
+            <h4>{getTeamName(match.ATeamID)}</h4>
+          </Link>
           <div className="formation">
             {teamAPlayers.map(player => (
               <div key={player.ID} className={`player ${player.Position}`}>
@@ -52,7 +58,9 @@ const MatchDetails = () => {
 
         {/* TeamB */}
         <div className="team">
-          <h4>{getTeamName(match.BTeamID)}</h4>
+          <Link to={`/team/${match.BTeamID}`} state={{matchId: match.ID}} className="team-name">
+            <h4>{getTeamName(match.BTeamID)}</h4>
+          </Link>
           <div className="formation">
             {teamBPlayers.map(player => (
               <div key={player.ID} className={`player ${player.Position}`}>
@@ -62,10 +70,16 @@ const MatchDetails = () => {
           </div>
         </div>
       </div>
-  </div>
+
+      <div className="back-button-container">
+        <button className="home-button" onClick={() => navigate("/")}>
+          HomePage
+        </button>
+      </div>
+    </div>
 
 
-    
+
   );
 };
 
