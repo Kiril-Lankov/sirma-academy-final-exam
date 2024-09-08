@@ -1,54 +1,38 @@
-import React, { useState } from 'react';
+import React from "react";
+import { useParams } from "react-router-dom";
+import useCSV from "../hooks/useCSV";
 
-import PlayerInfo from './PlayerInfo';
+export default function TeamDetails() {
+  const {teamID} = useParams();
+  const {data: teams, loading : teamsLoading, error: teamsError} = useCSV("/data/teams.csv");
+  const {data:players, loading: playersLoading, error: playersError} = useCSV("/data/players.csv");
 
-const TeamDetails = ({ team }) => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filterPosition, setFilterPosition] = useState('');
+  if (teamsLoading || playersLoading)
+    return <p>Loading team...</p>
 
-  const filteredPlayers = team.players.filter(player => {
-    const matchesSearch = player.fullName.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesPosition = filterPosition === '' || player.position === filterPosition;
-    return matchesSearch && matchesPosition;
-  });
+  //finding tem by its ID
+  const team = teams.find(t => t.ID === teamID);
+
+  if (!team)
+    return <p>Team not found</p>;
+
+  const teamPlayers = players.filter(p => p.teamID === teamID);
 
   return (
-    <div className="team-details">
-      <div className="team-info">
-        <h1>{team.name}</h1>
-        <p>Manager: {team.managerFullName}</p>
-      </div>
+    <div>
+      <h2>{team.Name}</h2>
+      <p>Manager: {team.ManagerFullName}</p>
 
-      <div className="search-filter">
-        <input 
-          type="text" 
-          placeholder="Search player by name" 
-          value={searchTerm} 
-          onChange={(e) => setSearchTerm(e.target.value)} 
-        />
-        <select onChange={(e) => setFilterPosition(e.target.value)}>
-          <option value="">All Positions</option>
-          <option value="GK">Goalkeeper</option>
-          <option value="DF">Defender</option>
-          <option value="MF">Midfielder</option>
-          <option value="FW">Forward</option>
-        </select>
-      </div>
-
-      <div className="roster">
-        <h2>Roster</h2>
-        <div className="player-list">
-          {filteredPlayers.length > 0 ? (
-            filteredPlayers.map(player => (
-              <PlayerInfo key={player.id} player={player} />
-            ))
-          ) : (
-            <p>No players found</p>
-          )}
-        </div>
-      </div>
+      <h3>Team Roster</h3>
+      <ul>
+        {teamPlayers.map(player => (
+          <li key={player.ID}>
+            {player.FullName} - {player.Position}
+            </li>
+        ))}
+      </ul>
     </div>
+  
   );
-};
 
-export default TeamDetails;
+}
