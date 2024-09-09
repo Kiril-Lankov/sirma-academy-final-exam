@@ -15,7 +15,7 @@ export default function MatchDetails() {
 
   if (matchesLoading || playersLoading || teamsLoading) return <p>Loading match details...</p>;
 
-  // Find match by matchId
+  // find match by matchId
   const match = matches.find(m => m.ID === matchId);
   if (!match) return <p>Match not found.</p>;
 
@@ -26,8 +26,6 @@ export default function MatchDetails() {
   };
 
   
-
-  // Players for both teams
   const teamAPlayers = players.filter(player => player.TeamID === match.ATeamID);
   const teamBPlayers = players.filter(player => player.TeamID === match.BTeamID);
 

@@ -16,7 +16,7 @@ export default function HomePage() {
     return team ? team.Name : "Unknown Team";
   }
 
-  // parsing and date and handle cases for undefined date
+  // parsing date and handle cases for undefined date
 
   const normalData = (dateString) => {
     const chunks = dateString.split("/");
@@ -84,7 +84,7 @@ export default function HomePage() {
       acc[phase].push(match);
     
       return acc;
-    }, {}) || {};
+    }, {}) || {}; //ensure in every case an object will be returned
   }
 
   const matchesByPhase = groupMatchesByPhase();

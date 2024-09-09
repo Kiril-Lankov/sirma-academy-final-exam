@@ -26,11 +26,11 @@ export default function useCSV(url) {
 
   const parseCSV = (csvText) => {
     const lines = csvText.split("\n").map(line => line.trim());
-    const headers = lines[0].split(",").map(header => header.trim()); // Extract headers
+    const headers = lines[0].split(",").map(header => header.trim()); // extract headers
     return lines.slice(1).map(line => {
-      const values = line.split(",").map(value => value.trim()); // Extract row values
+      const values = line.split(",").map(value => value.trim()); // extract row values
       return headers.reduce((obj, header, index) => {
-        obj[header] = values[index];  // Map headers to values
+        obj[header] = values[index];  // map headers to values
         return obj;
       }, {});
     });
